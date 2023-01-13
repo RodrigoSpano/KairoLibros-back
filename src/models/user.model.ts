@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose"
-import {UserBase} from '../utilities/interfaces/index'
+import {UserBase, UserFunctions} from '../utilities/interfaces/index'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
@@ -17,7 +17,10 @@ const userSchema = new Schema<UserBase>({
         type: String,
         required: true
     },
-    password: String,
+    password: {
+        type: String,
+        required: true
+    },
     isAdmin: {
         type: Boolean,
         default: false,
@@ -39,4 +42,4 @@ userSchema.methods.createToken = function(){
     return jwt.sign({id: this.id, email: this.email}, `${process.env.JWT_SECRET}`, {expiresIn: '30m'})
 }
 
-export default model<UserBase>('user', userSchema)
+export default model<UserFunctions>('user', userSchema)

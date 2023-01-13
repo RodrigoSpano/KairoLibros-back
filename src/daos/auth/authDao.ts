@@ -2,7 +2,7 @@ import { LoginData, UserBase } from "../../utilities/interfaces";
 import userModel from "../../models/user.model";
 
 class AuthDao{
-    private model = userModel
+    protected model = userModel
     constructor(){}
 
     async register(data: UserBase){
