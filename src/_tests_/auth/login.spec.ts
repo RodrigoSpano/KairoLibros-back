@@ -33,11 +33,11 @@ describe("testing login functionality", () => {
 });
 
 describe('testing endopoint', () => {
+  const data: LoginData = {
+    email: 'rorrospano17@gmail.com',
+    password: 'contrasena'
+  }
   it('should return statusCode 200', async () => {
-    const data: LoginData = {
-      email: 'rorrospano17@gmail.com',
-      password: 'contrasena'
-    }
     const response = await request(app).post('/auth/login').send(data)
     expect(response.statusCode).toBe(200)
   })
@@ -48,6 +48,11 @@ describe('testing endopoint', () => {
     }
     const response = await request(app).post('/auth/login').send(data)
     expect(response.headers['content-type']).toEqual(expect.stringContaining('application/json'))
+  })
+  it('should redirect to home and authorize me', async () => {
+    const response = await request(app).post('/auth/login').send(data)
+    expect(response.redirect).toBeTruthy()
+
   })
   it('should return statuscode 404, error, user not found', async () => {
     const response = await request(app).post('/auth/login').send({email: 'wrong@mail.com', password:'contra'})

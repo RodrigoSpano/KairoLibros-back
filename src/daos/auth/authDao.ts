@@ -28,6 +28,7 @@ class AuthDao{
                     }
                 }
             }
+            return Error
         } catch (error) {
             return error
         }

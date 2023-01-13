@@ -1,7 +1,7 @@
 import { Request } from 'express'
 import { Types } from 'mongoose'
 import passport from 'passport'
-import { Strategy } from 'passport-jwt'
+import { ExtractJwt, Strategy } from 'passport-jwt'
 import userModel from '../../models/user.model'
 
 interface IPayload {
@@ -11,7 +11,7 @@ interface IPayload {
 
 const cookieExtractor = function(req: Request) {
   let token = null
-  if(req && req.cookies) token = req.cookies['myToken']
+  if(req && req.cookies) token = req.cookies['Authorization']
   return token
 }
 

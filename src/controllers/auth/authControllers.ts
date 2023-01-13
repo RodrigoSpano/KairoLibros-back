@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import AuthApi from "../../api/authApi";
 import { LoginData, UserBase } from "../../utilities/interfaces";
 
-const api = new AuthApi();
+const api: AuthApi = new AuthApi();
 
 export const signup = async (req: Request, res: Response) => {
   try {
@@ -26,11 +26,9 @@ export const login = async (req: Request, res: Response) => {
     const data: LoginData = req.body;
     const log: any = await api.login(data);
     if (log) {
-      res.cookie("myToken", `Bearer ${log.token}`, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-      });
-      return res.json("you are loged");
+    res.cookie('Authorization', log.token, {httpOnly: true, secure: process.env.NODE_ENV === 'production'})
+      res.redirect('/')
+			return
     }
   } catch (error: any) {
     res.status(500).json({ error: error.message });
@@ -39,7 +37,7 @@ export const login = async (req: Request, res: Response) => {
 
 export const logout = async (req: Request, res: Response) => {
   try {
-    res.clearCookie("myToken");
+    res.clearCookie("Authorization");
     req.session.destroy((error) => {
       if (error) return res.status(400).json({ error: error.message });
     });
