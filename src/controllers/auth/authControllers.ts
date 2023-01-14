@@ -27,7 +27,7 @@ export const login = async (req: Request, res: Response) => {
     const log: any = await api.login(data);
     if (log) {
     res.cookie('Authorization', log.token, {httpOnly: true, secure: process.env.NODE_ENV === 'production'})
-      res.redirect('/')
+      res.redirect('/auth')
 			return
     }
   } catch (error: any) {
@@ -46,3 +46,8 @@ export const logout = async (req: Request, res: Response) => {
     return res.status(500).json({ error: error.message });
   }
 };
+
+
+export const authentication = async (req: Request, res: Response) => {
+  res.status(200).json({success: true})
+}
