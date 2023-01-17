@@ -10,4 +10,9 @@ router.post('/signup', authMiddlewares.registerVerify, signup)
 router.post('/login', authMiddlewares.userExists, login)
 router.delete('/logout', logout)
 
+//google
+router.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}))
+router.get('/google/callback', passport.authenticate('google', {successRedirect: '/success', failureRedirect:'/auth/login'}))
+
+
 export default router

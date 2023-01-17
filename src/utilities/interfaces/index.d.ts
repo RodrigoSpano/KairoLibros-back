@@ -1,6 +1,7 @@
 import { Document, Types } from "mongoose"
 
 export interface UserBase {
+    googleId?: string | Types.ObjectId
     fullName: string
     email: string
     phone: string

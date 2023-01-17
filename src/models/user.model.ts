@@ -4,6 +4,10 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 const userSchema = new Schema<UserBase>({
+    googleId: {
+        type: String,
+        required: false
+    },
     fullName: {
         type: String,
         required: true

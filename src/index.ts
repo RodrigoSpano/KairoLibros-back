@@ -9,6 +9,8 @@ import 'dotenv/config'
 import indexRouter from './routes/index.routes'
 import JWTStrategy from './utilities/helpers/passport.config'
 
+require('./utilities/helpers/google')
+
 const app = express()
 
 app.use(

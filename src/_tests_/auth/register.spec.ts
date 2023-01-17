@@ -42,7 +42,7 @@ describe('testing functionality', () =>{
 
 
 describe('testing endpoint', () => {
-    it('shuold return 200 statusCode', async () =>{
+    it.only('shuold return 200 statusCode', async () =>{
         const data = {
             firstName: 'rodrigo',
             lastName: 'spano',
