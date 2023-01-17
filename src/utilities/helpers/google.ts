@@ -31,7 +31,6 @@ passport.use(
 )
 
 passport.serializeUser((user: Partial<UserBase>, done) => done(null, user._id))
-// passport.serializeUser((user, done) => done(null, user.googleId! || user.id!))
 passport.deserializeUser(async (id, done) => {
   const user = await userModel.findById(id)
   done(null, user)
