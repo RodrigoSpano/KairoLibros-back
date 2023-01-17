@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import passport from 'passport'
+
 import 'dotenv/config'
 
 import indexRouter from './routes/index.routes'
@@ -33,6 +34,7 @@ app.use(cookieParser(process.env.SECRET))
 app.use(passport.initialize())
 app.use(passport.session())
 passport.use(JWTStrategy)
+
 
 app.use(indexRouter)
 
