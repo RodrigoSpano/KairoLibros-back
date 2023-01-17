@@ -9,7 +9,7 @@ export const signup = async (req: Request, res: Response) => {
     if (req.body.repeatPassword !== req.body.password)
       return res.status(400).json({ error: "passwords do not match" });
     const data: UserBase = {
-      fullName: `${req.body.firstName} ${req.body.lastName}`,
+      username: `${req.body.firstName} ${req.body.lastName}`,
       email: req.body.email,
       phone: `${req.body.phoneArea} ${req.body.phoneNumber}`,
       password: req.body.password,

@@ -2,7 +2,7 @@ import { Document, Types } from "mongoose"
 
 export interface UserBase {
     googleId?: string | Types.ObjectId
-    fullName: string
+    username: string
     email: string
     phone: string
     password: string,
@@ -25,7 +25,7 @@ export interface IResponseUser {
     _body: {
         success: boolean
         user: {
-            fullName: string
+            username: string
             email: string
             phone: string
             password: string

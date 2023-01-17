@@ -42,7 +42,7 @@ describe('testing functionality', () =>{
 
 
 describe('testing endpoint', () => {
-    it.only('shuold return 200 statusCode', async () =>{
+    it('shuold return 200 statusCode', async () =>{
         const data = {
             firstName: 'rodrigo',
             lastName: 'spano',
@@ -67,7 +67,7 @@ describe('testing endpoint', () => {
         }
         const response: IResponseUser = await request(app).post('/auth/signup').send(data)
         expect(response._body.success).toBeTruthy()
-        expect(response._body.user.fullName).toBeDefined()
+        expect(response._body.user.username).toBeDefined()
         expect(response._body.user.email).toBeDefined()
         expect(response._body.user.phone).toBeDefined()
         expect(response._body.user.password).toBeDefined()
