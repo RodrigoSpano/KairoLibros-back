@@ -1,5 +1,6 @@
 import { Document, Types } from "mongoose"
 
+//users
 export interface UserBase {
     googleId?: string | Types.ObjectId
     username: string
@@ -33,4 +34,19 @@ export interface IResponseUser {
             _id: string | Types.ObjectId
         }
     }
+}
+
+//products
+export interface IProductBase {
+    title: string
+    author: string
+    price: number
+    gender: string[]
+    description: string
+    images: String[]
+    stock: number
+    popular: boolean
+    sale: boolean
+    off?: number
+    _id?: Types.ObjectId
 }

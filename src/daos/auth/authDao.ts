@@ -33,7 +33,6 @@ class AuthDao{
             return error
         }
     }
-
 }
 
 export default AuthDao
