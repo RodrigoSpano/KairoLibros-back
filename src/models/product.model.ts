@@ -34,7 +34,8 @@ const productSchema = new Schema<IProductBase>({
   sale: {
     type: Boolean,
     default: false
-  }
+  },
+  off: Number
 })
 
 export default model<IProductBase>('products', productSchema)
