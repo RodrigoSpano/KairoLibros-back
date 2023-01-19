@@ -57,6 +57,8 @@ export interface ProductResponse {
     "content-type": string;
   };
   _body: {
+    stock?: number
+    price?: number
     products?: IProductBase | IProductBase[];
     product?: IProductBase;
     error?: string;

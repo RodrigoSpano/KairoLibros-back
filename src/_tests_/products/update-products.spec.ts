@@ -1,7 +1,7 @@
 import { expect } from "@jest/globals";
 import ProductDao from "../../daos/products/productDao";
-import { IProductBase } from "../../utilities/interfaces";
 import mongoose from "mongoose";
+
 
 beforeEach(async () => {
   mongoose.set("strictQuery", false);
@@ -40,10 +40,11 @@ describe("update products functionality", () => {
       expect(response.off).toBeUndefined()
     }
   })
+  it('should update stock', async () => {
+    const stock:number = 77
+    const response:any = await dao.updateStock(id, stock)
+    expect(response.stock).toBe(stock)
+  })
 });
-
-describe('update endpoints tests', () => {
-  
-})
 
 afterAll(() => mongoose.disconnect());

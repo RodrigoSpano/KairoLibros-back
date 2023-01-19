@@ -49,20 +49,35 @@ export const createProduct = async (req: Request, res: Response) => {
 
 export const updatePrice = async (req: Request, res: Response) => {
   try {
+    const findProd = await productModel.findById(req.params.id)
+    if(!findProd) return res.status(400).json('product do not exists') 
     const updateProductPrice = await api.updatePrice(
       req.params.id,
       req.body.price
     );
-    return res.status(200).json({ updatedProduct: updateProductPrice });
+    res.status(200).json({ product: updateProductPrice });
   } catch (error) {
     res.status(500).json(error);
   }
 };
 
+export const updateStock = async (req: Request, res: Response) => {
+  try {
+    const findProd = await productModel.findById(req.params.id)
+    if(!findProd) return res.status(400).json('product do not exists') 
+    const productToStock = await api.updateStock(req.params.id, req.body.stock)
+    res.status(200).json({product: productToStock})
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export const togglePopular = async (req: Request, res: Response) => {
   try {
+    const findProd = await productModel.findById(req.params.id)
+    if(!findProd) return res.status(400).json('product do not exists') 
     const product = await api.togglePopular(req.params.id);
-    return res.status(200).json(product);
+    res.status(200).json(product);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -70,6 +85,8 @@ export const togglePopular = async (req: Request, res: Response) => {
 
 export const toggleSale = async (req: Request, res: Response) => {
   try {
+    const findProd = await productModel.findById(req.params.id)
+    if(!findProd) return res.status(400).json('product do not exists') 
     const product = await api.toggleSale(req.params.id, req.body.off);
     res.status(200).json(product);
   } catch (error) {

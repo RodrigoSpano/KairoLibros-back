@@ -19,6 +19,9 @@ class ProductApi{
   async updatePrice(id: string, price: number){
     return await this.dao.updatePrice(id, price)
   }
+  async updateStock(id: string, stock:number){
+    return await this.dao.updateStock(id, stock)
+  }
   async togglePopular(id: string){
     return await this.dao.togglePopular(id)
   }

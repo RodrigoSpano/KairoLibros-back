@@ -58,6 +58,15 @@ class ProductDao {
     }
   }
 
+  async updateStock(id: string, stock: number){
+    try {
+      const product = await this.model.findOneAndUpdate({_id: id}, {stock}, {new: true})
+      return product
+    } catch (error) {
+      return error
+    }
+  }
+
   async togglePopular(id: string){
     try {
       const findProduct = await this.model.findById(id)
