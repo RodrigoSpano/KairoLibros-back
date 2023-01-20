@@ -6,7 +6,7 @@ import * as authMiddlewares from "../../utilities/middlewares/authMiddlewares";
 const router = Router()
 
 router.get('/google', passport.authenticate('google', {session: true, scope: ['profile', 'email']}))
-router.get('/google/callback', passport.authenticate('google', {successRedirect: '/success', failureRedirect:'/auth/login'}))
+router.get('/google/callback', passport.authenticate('google', {successRedirect: '/', failureRedirect:'/auth/login'}))
 router.get('/', passport.authenticate('jwt', {session: true, failureRedirect: '/auth/login'}), authentication)
 router.post('/signup', authMiddlewares.registerVerify, signup)
 router.post('/login', authMiddlewares.userExists, login)
