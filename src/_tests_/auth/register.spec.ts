@@ -9,20 +9,19 @@ import app from '../../index'
 beforeEach(async () => {
     mongoose.set('strictQuery', false)
     await mongoose.connect(`${process.env.MONGO_URI}`)
-        .then(() => console.log('db connected'))
 })
 
 describe('testing functionality', () =>{
     const dao = new AuthDao()
     it('should create a user and return it', async () => {
         const data: UserBase = {
-            fullName: 'juancito castillo',
+            username: 'juancito castillo',
             email: 'prueba@gmail.com',
             phone: '+54 1177623123',
             password: 'contrasena'
         }
         const user = await dao.register(data)
-        expect(user.fullName).toBeDefined()
+        expect(user.username).toBeDefined()
         expect(user.email).toBeDefined()
         expect(user.phone).toBeDefined()
         expect(user.password).toBeDefined()

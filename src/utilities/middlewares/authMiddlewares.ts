@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction} from 'express'
 import userModel from '../../models/user.model'
+import { UserBase } from '../interfaces'
 
 export const registerVerify = async (req: Request, res: Response, next: NextFunction) => {
     const data = req.body
@@ -23,4 +24,11 @@ export const userIsLogged = async (req: Request, res: Response, next: NextFuncti
 export const isAuth = async (req: Request, res: Response, next: NextFunction) => {
   if(!req.isAuthenticated()) return res.redirect('/auth/login')
   return next()
+}
+
+export const isAdmin = async (req: Request, res: Response, next:NextFunction) => {
+  const reqUser: Partial<UserBase> = req.user!
+  if(!req.user) return res.redirect('/auth/login')
+    if(reqUser.isAdmin) return next()
+    return res.status(401).redirect('/products')
 }
