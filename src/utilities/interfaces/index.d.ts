@@ -64,3 +64,18 @@ export interface ProductResponse {
     error?: string;
   };
 }
+
+export interface CartItemForArray {
+  productId: string
+  price: number
+  quantity: number
+}
+
+export interface CartBase {
+  id?: Types.ObjectId | string
+  total: number
+  email: string
+  items: [CartItemForArray]
+}
+
+//order cost shipping is 700
