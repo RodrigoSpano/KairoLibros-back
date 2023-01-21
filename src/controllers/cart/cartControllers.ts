@@ -28,6 +28,16 @@ export const getOneCart = async (req: Request, res: Response) => {
   }
 }
 
+export const removeItem = async (req: Request, res: Response) => {
+  try {
+    const user: Partial<UserBase> | any = req.user!
+    await api.removeItem(user.email, req.params.id)
+    res.status(200).json({success: true})
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export const clearCart = async (req: Request, res: Response) => {
   try {
     const user: Partial<UserBase> | any = req.user!

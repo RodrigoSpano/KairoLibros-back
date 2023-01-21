@@ -10,6 +10,9 @@ class CartApi {
   async addProduct(itemData: CartItemForArray, email: string){
     return await this.dao.addProduct(itemData, email)
   }
+  async removeItem(email: string, id: string){
+    return await this.dao.removeItem(email, id)
+  }
   async getOneCart(email: string){
     return await this.dao.getOneCart(email)
   }

@@ -11,4 +11,3 @@ export const itemsControlFn = async (email:string, id: string) => {
   const checkExists = findCart?.items.some((el: Partial<CartItemForArray>) => el.productId === id )
   return !!checkExists
 }
-

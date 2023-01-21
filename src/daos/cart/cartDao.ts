@@ -42,6 +42,15 @@ class CartDao {
     }
   }
 
+  async removeItem(email: string, id: string){
+    try {
+      const newCartUpdated = await this.model.findOneAndUpdate({email}, {$pull: {items: {productId: id}}}, {new: true})  
+      return {cart: newCartUpdated}
+    } catch (error) {
+      return error
+    }
+  }
+
   async clearCart(email: string){
     try {
       await this.model.findOneAndUpdate({email}, {$set: {'items': []}}, {new: true})
