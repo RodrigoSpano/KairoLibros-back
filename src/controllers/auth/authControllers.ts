@@ -47,6 +47,14 @@ export const logout = async (req: Request, res: Response) => {
   }
 };
 
+export const changePassword = async (req: Request, res: Response) => {
+  try {
+    const user: Partial<UserBase> = req.user!
+    return await api.changePassword(req.user ? user.email! : req.body.email , req.body.newPassword)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
 
 export const authentication = async (req: Request, res: Response) => {
   res.status(200).json({success: true})

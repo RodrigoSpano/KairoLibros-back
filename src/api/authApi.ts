@@ -11,6 +11,9 @@ class AuthApi{
     async login(data:LoginData){
         return await this.dao.login(data)
     }
+    async changePassword(email: string, password: string){
+        return await this.dao.changePassword(email, password)
+    }
 }
 
 export default AuthApi

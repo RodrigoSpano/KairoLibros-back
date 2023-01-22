@@ -1,5 +1,6 @@
 import { LoginData, UserBase } from "../../utilities/interfaces";
 import userModel from "../../models/user.model";
+import bcrypt from 'bcrypt'
 
 class AuthDao{
     protected model = userModel
@@ -29,6 +30,18 @@ class AuthDao{
                 }
             }
             return Error
+        } catch (error) {
+            return error
+        }
+    }
+
+    async changePassword(email: string, password: string){
+        try {
+            const findUser = await userModel.findOne({email})
+            if(findUser){
+                const newPassword: string = bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+                return await userModel.findOneAndUpdate({email}, {password: newPassword}, {new: true})
+            } return Error
         } catch (error) {
             return error
         }
