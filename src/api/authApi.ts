@@ -1,5 +1,5 @@
 import AuthDao from "../daos/auth/authDao";
-import { LoginData, UserBase } from "../utilities/interfaces";
+import { LoginData, UserBase } from "../utilities/types";
 
 class AuthApi{
     private dao = new AuthDao()

@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose"
-import {UserBase, UserFunctions} from '../utilities/interfaces/index'
+import {UserBase, UserFunctions} from '../utilities/types/index'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 

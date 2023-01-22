@@ -1,5 +1,5 @@
 import cartModel from "../../models/cart.model"
-import { CartItemForArray } from "../interfaces"
+import { CartItemForArray } from "../types"
 
 export const MONGO_CONFIG = {
     useUnifiedTopology: true,

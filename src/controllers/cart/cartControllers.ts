@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import CartApi from "../../api/cartApi";
 import { itemsControlFn } from "../../utilities/helpers/helpers";
-import { UserBase } from "../../utilities/interfaces";
+import { UserBase } from "../../utilities/types";
 
 const api: CartApi = new CartApi()
 
@@ -25,6 +25,16 @@ export const getOneCart = async (req: Request, res: Response) => {
     return res.status(200).json(cart)
   } catch (error) {
     res.status(500).json(error)
+  }
+}
+
+export const toggleShip = async (req: Request, res: Response) => {
+  try {
+    const user: Partial<UserBase>|any = req.user!
+    await api.toggleShip(user.email)
+    res.status(200).json({success: true})
+  } catch (error) {
+    return error
   }
 }
 

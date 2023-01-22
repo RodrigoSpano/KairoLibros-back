@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction} from 'express'
 import userModel from '../../models/user.model'
-import { UserBase } from '../interfaces'
+import { UserBase } from '../types'
 
 export const registerVerify = async (req: Request, res: Response, next: NextFunction) => {
     const data = req.body

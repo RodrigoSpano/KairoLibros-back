@@ -69,13 +69,16 @@ export interface CartItemForArray {
   productId: string
   price: number
   quantity: number
+  thumbnail: string
 }
 
-export interface CartBase {
+export interface CartBase{
   id?: Types.ObjectId | string
   total: number
   email: string
   items: [CartItemForArray]
+  ship: boolea
+  shipCost?: number
 }
 
 //order cost shipping is 700

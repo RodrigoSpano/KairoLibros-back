@@ -1,5 +1,5 @@
 import CartDao from "../daos/cart/cartDao";
-import { CartItemForArray } from "../utilities/interfaces";
+import { CartItemForArray } from "../utilities/types";
 
 class CartApi {
   private dao: CartDao = new CartDao()
@@ -9,6 +9,9 @@ class CartApi {
   }
   async addProduct(itemData: CartItemForArray, email: string){
     return await this.dao.addProduct(itemData, email)
+  }
+  async toggleShip(email: string){
+    return await this.dao.toggleShip(email)
   }
   async removeItem(email: string, id: string){
     return await this.dao.removeItem(email, id)

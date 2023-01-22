@@ -1,6 +1,6 @@
 import cartModel from "../../models/cart.model";
 import productModel from "../../models/product.model";
-import { CartItemForArray } from "../../utilities/interfaces";
+import { CartBase, CartItemForArray } from "../../utilities/types";
 
 class CartDao {
   private model = cartModel
@@ -10,20 +10,20 @@ class CartDao {
     try {
       return await this.model.create({
         email: email,
-        items: []
+        items: [],
       })
     } catch (error) {
       return error
     }
   }
 
-  async addProduct(itemsData: CartItemForArray, email: string){ //todo on controller verify cart
+  async addProduct(itemsData: CartItemForArray, email: string){
     try {
       const findProduct = await this.productModel.findOne({_id: itemsData.productId})
       if(findProduct && findProduct.stock >= itemsData.quantity){
         const findCart = await this.model.findOne({email})
+        const total:number = findCart!.items.reduce((acc, el) => (acc += el.price * el.quantity), 0) + itemsData.price * itemsData.quantity
         if(findCart){
-          const total: number = findCart.items.reduce((acc, el) => (acc += el.price * el.quantity), 0) 
           const addProd: any = await this.model.findOneAndUpdate({email}, {$push: {items: itemsData}, total}, {new: true})
           return addProd
         }
@@ -35,8 +35,23 @@ class CartDao {
   
   async getOneCart(email: string){
     try {
-      const oneCart = await this.model.findOne({email})
-      return oneCart
+      const cart = await this.model.findOne({email})
+      return cart
+    } catch (error) {
+      return error
+    }
+  }
+
+  async toggleShip(email:string){
+    try {
+      const findCart = await this.model.findOne({email})
+      if(!findCart!.ship){
+        const updatedCartShip = await this.model.findOneAndUpdate({email}, {$set: {shipCost: 700}, ship: true}, {new: true})
+        return updatedCartShip
+      } else {
+        const updatedCartShip = await this.model.findOneAndUpdate({email}, {$unset: {'shipCost': ''}, ship: false}, {new: true})
+        return updatedCartShip
+      }
     } catch (error) {
       return error
     }
@@ -44,8 +59,12 @@ class CartDao {
 
   async removeItem(email: string, id: string){
     try {
-      const newCartUpdated = await this.model.findOneAndUpdate({email}, {$pull: {items: {productId: id}}}, {new: true})  
-      return {cart: newCartUpdated}
+      await this.model.findOneAndUpdate({email}, {$pull: {items: {productId: id}}}, {new: true})  
+        .then(async(resp) => {
+          const total:number = resp!.items.reduce((acc, el) => (acc += el.price * el.quantity), 0)
+          const cart = await this.model.findOneAndUpdate({email}, {total}, {new: true})
+          return cart
+        })
     } catch (error) {
       return error
     }
@@ -53,7 +72,7 @@ class CartDao {
 
   async clearCart(email: string){
     try {
-      return await this.model.findOneAndUpdate({email}, {$set: {'items': []}}, {new: true})
+      return await this.model.findOneAndUpdate({email}, {$set: {'items': []}, total: 0}, {new: true})
     } catch (error) {
       return error
     }

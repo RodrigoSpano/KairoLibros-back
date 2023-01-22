@@ -1,4 +1,4 @@
-import { LoginData, UserBase } from "../../utilities/interfaces";
+import { LoginData, UserBase } from "../../utilities/types";
 import userModel from "../../models/user.model";
 import bcrypt from 'bcrypt'
 

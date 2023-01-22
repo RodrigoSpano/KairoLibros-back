@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import AuthApi from "../../api/authApi";
-import { LoginData, UserBase } from "../../utilities/interfaces";
+import { LoginData, UserBase } from "../../utilities/types";
 
 const api: AuthApi = new AuthApi();
 

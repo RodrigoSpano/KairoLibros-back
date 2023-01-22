@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction} from 'express'
 import CartApi from '../../api/cartApi'
 import cartModel from '../../models/cart.model'
-import { UserBase } from '../interfaces'
+import { UserBase } from '../types'
 
 export const cartHandler = async (req: Request, res: Response, next: NextFunction) => {
   const api: CartApi = new CartApi()

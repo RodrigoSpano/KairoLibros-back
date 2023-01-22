@@ -1,5 +1,5 @@
 import ProductDao from "../daos/products/productDao";
-import { IProductBase } from "../utilities/interfaces";
+import { IProductBase } from "../utilities/types";
 
 class ProductApi{
   private dao: ProductDao = new ProductDao()
