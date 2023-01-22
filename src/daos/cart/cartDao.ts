@@ -1,6 +1,6 @@
 import cartModel from "../../models/cart.model";
 import productModel from "../../models/product.model";
-import { CartBase, CartItemForArray } from "../../utilities/interfaces";
+import { CartItemForArray } from "../../utilities/interfaces";
 
 class CartDao {
   private model = cartModel
@@ -53,7 +53,7 @@ class CartDao {
 
   async clearCart(email: string){
     try {
-      await this.model.findOneAndUpdate({email}, {$set: {'items': []}}, {new: true})
+      return await this.model.findOneAndUpdate({email}, {$set: {'items': []}}, {new: true})
     } catch (error) {
       return error
     }
