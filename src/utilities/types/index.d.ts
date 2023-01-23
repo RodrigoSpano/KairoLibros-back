@@ -81,4 +81,22 @@ export interface CartBase{
   shipCost?: number
 }
 
-//order cost shipping is 700
+export interface ProductItemsOrder {
+  title: string
+  author: string
+  price: number
+  quantity: number
+  productId: string | Types.ObjectId
+}
+
+export interface OrderBase {
+  id?: Types.ObjectId | string
+  userData: Partial<UserBase>
+  items: [ProductItemsOrder]
+  ship: boolean
+  address?: string
+  date: date
+  totalPrice: number
+  paymentMehtod: string
+  orderNumber: Types.ObjectId | string
+}
