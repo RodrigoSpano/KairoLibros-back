@@ -100,3 +100,41 @@ export interface OrderBase {
   paymentMehtod: string
   orderNumber: Types.ObjectId | string
 }
+
+//mp one payment
+export interface RootMP_Body {
+  payer_email: string
+  items: Item[]
+  backs_url: BacksUrl
+  notification_url: string
+}
+
+export interface Item {
+  title: string
+  description: string
+  picture_url: string
+  category_id: string
+  quantity: number
+  unit_price: number
+}
+
+export interface BacksUrl {
+  success: string
+  failure: string
+  pending: string
+}
+
+//mp sub
+export interface RootSub {
+  reason: string
+  auto_recurring: AutoRecurring
+  back_url: string
+  payer_email: string
+}
+
+export interface AutoRecurring {
+  frequency: number
+  frequency_type: string
+  transaction_amount: number
+  currency_id: string
+}
