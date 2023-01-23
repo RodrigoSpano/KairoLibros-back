@@ -1,15 +1,10 @@
 import { Router } from "express";
-import PaymentController from '../../controllers/payments/paymentsControllers'
-import PaymentService from '../../services/PaymentsService'
+import * as controller from '../../controllers/payments/mpControllers'
 const router = Router()
 
-const PaymentInstance = new PaymentController(new PaymentService())
 
-router.get('/mercadopago', (req, res) => {
-  PaymentInstance.getPaymentLink(req, res)
-} )
-router.get('/subscription', (req, res) => {
-  PaymentInstance.getSubscriptionLink(req, res)
-} )
+router.post('/mercadopago', controller.getPaymentLink)
+
+//todo => failed with POST method, better to try do a GET with the data from MONGODB CART, asi probrablemnte me deje hacerlo
 
 export default router

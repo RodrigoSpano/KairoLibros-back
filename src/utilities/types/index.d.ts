@@ -104,12 +104,19 @@ export interface OrderBase {
 //mp one payment
 export interface RootMP_Body {
   payer_email: string
-  items: Item[]
-  backs_url: BacksUrl
+  items: ItemPayment[]
+  backs_url: BacksUrlPayment
+  shipments: shipmentsPayment
   notification_url: string
+  shipCost: number
 }
 
-export interface Item {
+interface shipmentsPayment {
+  cost: number
+  mode: string
+}
+
+export interface ItemPayment {
   title: string
   description: string
   picture_url: string
@@ -118,23 +125,8 @@ export interface Item {
   unit_price: number
 }
 
-export interface BacksUrl {
+export interface BacksUrlPayment {
   success: string
   failure: string
   pending: string
-}
-
-//mp sub
-export interface RootSub {
-  reason: string
-  auto_recurring: AutoRecurring
-  back_url: string
-  payer_email: string
-}
-
-export interface AutoRecurring {
-  frequency: number
-  frequency_type: string
-  transaction_amount: number
-  currency_id: string
 }
