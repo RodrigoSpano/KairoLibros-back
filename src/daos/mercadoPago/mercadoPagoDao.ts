@@ -8,9 +8,9 @@ class MercadopagoDao {
     this.subscriptionService = subscriptionService;
   }
 
-  async getPaymentLink(data: Partial<RootMP_Body>){
+  async getPaymentLink(){
     try {
-      const payment = await this.subscriptionService.createPayment(data)
+      const payment = await this.subscriptionService.createPayment()
       return payment
     } catch (error) {
       return error

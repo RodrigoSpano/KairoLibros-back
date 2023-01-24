@@ -4,8 +4,8 @@ import { RootMP_Body } from "../utilities/types";
 
 class MercadopagoApi{
   private dao: MercadopagoDao = new MercadopagoDao(new PaymentService())
-  async getPaymentLink(data: Partial<RootMP_Body>){
-    return await this.dao.getPaymentLink(data)
+  async getPaymentLink(){
+    return await this.dao.getPaymentLink()
   }
 }
 
