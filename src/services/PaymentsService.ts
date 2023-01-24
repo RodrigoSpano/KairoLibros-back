@@ -7,20 +7,19 @@ class PaymentService {
     const url: string = 'https://api.mercadopago.com/checkout/preferences'
 
     const cart = await cartModel.findOne({email})
-    const user = await userModel.findOne({email})
+    // const user = await userModel.findOne({email})
 
     const body = {
-      payer_email: email,
+      payer_email: 'test_user_1294452860@testuser.com',
       items: cart!.items,
       backs_url: {
-        success: 'www.google.com',
+        success: '/success',
         failure: '/failure',
         pending: '/pending'
       },
       shipments: {cost: cart?.ship ? cart.shipCost : 0, mode: 'not_specified'} ,
-      notification_url: 'http://localhost:8080/payment/notifications' //todo => endpoint para recibir estas notificaciones
+      notification_url: 'http://localhost:8080/payment/notifications',
     }
-
     const payment = await axios.post(url, body, {
       headers: {
         "Content-Type": 'application/json',
