@@ -1,29 +1,41 @@
-import { Schema, model, Types } from 'mongoose'
-import { OrderBase, ProductItemsOrder, UserBase } from '../utilities/types'
+import { Schema, model } from 'mongoose'
+import { AddressInfo, CartItemForArray, OrderBase, UserBase } from '../utilities/types'
 
-const userDataSchema = new Schema<Partial<UserBase>>({
+const userDataSchema = new Schema<UserBase>({
   username: String,
   email: String,
   phone: String
 })
 
-const ProductItemsOrder = new Schema<ProductItemsOrder>({
+const ProductItemsOrder = new Schema<CartItemForArray>({
+  productId: String,
   title: String,
-  author: String,
-  price: Number,
+  description: String,
+  unit_price: Number,
   quantity: Number,
-  productId: String || Types.ObjectId
+  picture_url: String,
+  category_id: String
+})
+
+const addressSchema = new Schema<AddressInfo>({
+  zip_code: String,
+  street_name: String,
+  street_number: Number
 })
 
 const OrderSchema = new Schema<OrderBase>({
   userData: userDataSchema,
   items: [ProductItemsOrder],
   ship: Boolean,
-  address: String,
+  address: addressSchema,
   date: Date,
   totalPrice: Number,
   paymentMehtod: String,
-  orderNumber: String
+  orderNumber: String,
+  arrived: {
+    type:Boolean,
+    default: false
+  }
 })
 
-export default model<OrderBase>('order',OrderSchema)
+export default model<OrderBase>('order', OrderSchema)

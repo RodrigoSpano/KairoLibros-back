@@ -16,7 +16,7 @@ class PaymentService {
         pending: '/pending'
       },
       shipments: {cost: cart?.ship ? cart.shipCost : 0, mode: 'not_specified'} ,
-      notification_url: 'https://www.your.site.com/ipn' //todo => endpoint para recibir estas notificaciones',
+      // notification_url: 'https://www.your.site.com/ipn' //todo => endpoint para recibir estas notificaciones',
     }
     const payment = await axios.post(url, body, {
       headers: {

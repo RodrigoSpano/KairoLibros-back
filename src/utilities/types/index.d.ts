@@ -92,13 +92,7 @@ export interface CartBase{
   address?: AddressInfo
 }
 
-export interface ProductItemsOrder {
-  title: string
-  author: string
-  price: number
-  quantity: number
-  productId: string | Types.ObjectId
-}
+//order
 
 export interface OrderBase {
   id?: Types.ObjectId | string
@@ -110,6 +104,7 @@ export interface OrderBase {
   totalPrice: number
   paymentMehtod: string
   orderNumber: Types.ObjectId | string
+  arrived: boolean
 }
 
 //mp one payment

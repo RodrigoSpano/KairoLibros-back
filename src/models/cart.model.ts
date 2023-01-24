@@ -1,5 +1,5 @@
 import { Schema, model, Types} from 'mongoose'
-import { CartBase, CartItemForArray } from '../utilities/types'
+import { AddressInfo, CartBase, CartItemForArray } from '../utilities/types'
 
 const itemSchema = new Schema<CartItemForArray>({
   productId: String,
@@ -11,7 +11,7 @@ const itemSchema = new Schema<CartItemForArray>({
   category_id: String
 })
 
-const addressSchema = new Schema({
+const addressSchema = new Schema<AddressInfo>({
   zip_code: String,
   street_name: String,
   street_number: Number
