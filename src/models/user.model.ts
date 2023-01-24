@@ -14,6 +14,7 @@ const userSchema = new Schema<UserBase>({
         required: true,
         unique: true
     },
+    area_code: String,
     phone: String,
     password: String,
     isAdmin: {

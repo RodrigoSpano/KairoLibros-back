@@ -11,7 +11,8 @@ export const signup = async (req: Request, res: Response) => {
     const data: UserBase = {
       username: `${req.body.firstName} ${req.body.lastName}`,
       email: req.body.email,
-      phone: `${req.body.phoneArea} ${req.body.phoneNumber}`,
+      area_code: req.body.area_code,
+      phone: req.body.phoneNumber,
       password: req.body.password,
     };
     const newUser = await api.register(data);

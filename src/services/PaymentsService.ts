@@ -1,22 +1,24 @@
 import axios from "axios"
 import cartModel from "../models/cart.model"
+import userModel from "../models/user.model"
 
 class PaymentService {
-  async createPayment(){
+  async createPayment(email: string){
     const url: string = 'https://api.mercadopago.com/checkout/preferences'
 
-    const cart = await cartModel.findOne({email: 'test_user_1293653588@testuser.com'})
+    const cart = await cartModel.findOne({email})
+    const user = await userModel.findOne({email})
 
     const body = {
-      payer_email: 'test_user_1293653588@testuser.com',
+      payer_email: email,
       items: cart!.items,
       backs_url: {
-        success: 'http://localhost:8080/success',
-        failure: 'http://localhost:8080/failure',
-        pending: 'http://localhost:8080/pending'
+        success: 'www.google.com',
+        failure: '/failure',
+        pending: '/pending'
       },
       shipments: {cost: cart?.ship ? cart.shipCost : 0, mode: 'not_specified'} ,
-      notification_url: 'http://localhost:8080/notifications' //todo => endpoint para recibir estas notificaciones
+      notification_url: 'http://localhost:8080/payment/notifications' //todo => endpoint para recibir estas notificaciones
     }
 
     const payment = await axios.post(url, body, {

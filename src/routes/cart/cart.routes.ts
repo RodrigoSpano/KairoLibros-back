@@ -9,5 +9,6 @@ router.get('/', cartHandler, controller.getOneCart)
 router.delete('/clear', cartHandler, controller.clearCart)
 router.delete('/clear/:id', controller.removeItem)
 router.put('/ship', cartHandler, controller.toggleShip)
+router.put('/address', cartHandler, controller.addAddressData)
 
 export default router

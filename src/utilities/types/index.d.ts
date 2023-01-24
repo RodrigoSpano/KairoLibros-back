@@ -5,6 +5,7 @@ export interface UserBase {
   googleId?: string | Types.ObjectId;
   username: string;
   email: string;
+  area_code: string;
   phone: string;
   password: string;
   isAdmin?: boolean;
@@ -75,6 +76,12 @@ export interface CartItemForArray {
   category_id: string
 }
 
+export interface AddressInfo {
+  zip_code: string;
+  street_name: string;
+  street_number: number;
+} 
+
 export interface CartBase{
   id?: Types.ObjectId | string
   total: number
@@ -82,6 +89,7 @@ export interface CartBase{
   items: [CartItemForArray]
   ship: boolea
   shipCost?: number
+  address?: AddressInfo
 }
 
 export interface ProductItemsOrder {

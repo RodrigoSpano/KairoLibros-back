@@ -8,9 +8,9 @@ class MercadopagoDao {
     this.subscriptionService = subscriptionService;
   }
 
-  async getPaymentLink(){
+  async getPaymentLink(email: string){
     try {
-      const payment = await this.subscriptionService.createPayment()
+      const payment = await this.subscriptionService.createPayment(email)
       return payment
     } catch (error) {
       return error

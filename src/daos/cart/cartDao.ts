@@ -1,6 +1,6 @@
 import cartModel from "../../models/cart.model";
 import productModel from "../../models/product.model";
-import { CartBase, CartItemForArray } from "../../utilities/types";
+import { AddressInfo, CartBase, CartItemForArray } from "../../utilities/types";
 
 class CartDao {
   private model = cartModel
@@ -49,13 +49,26 @@ class CartDao {
         const updatedCartShip = await this.model.findOneAndUpdate({email}, {$set: {shipCost: 700}, ship: true}, {new: true})
         return updatedCartShip
       } else {
-        const updatedCartShip = await this.model.findOneAndUpdate({email}, {$unset: {'shipCost': ''}, ship: false}, {new: true})
+        const updatedCartShip = await this.model.findOneAndUpdate({email}, {$unset: {'shipCost': '', 'address': {}}, ship: false}, {new: true})
         return updatedCartShip
       }
     } catch (error) {
       return error
     }
   }
+
+  async addAddressData (email: string, address: AddressInfo){
+    try {
+      const findCart = await this.model.findOne({email})
+      if(findCart?.ship){
+        return await this.model.findOneAndUpdate({email}, {$set: {address}},{new: true})
+      } else{
+        return await this.model.findOneAndUpdate({email}, {$unset: {"address": {}}}, {new: true})
+      }
+    } catch (error) {
+      return error
+    }
+  } 
 
   async removeItem(email: string, id: string){
     try {

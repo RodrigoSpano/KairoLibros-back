@@ -11,6 +11,12 @@ const itemSchema = new Schema<CartItemForArray>({
   category_id: String
 })
 
+const addressSchema = new Schema({
+  zip_code: String,
+  street_name: String,
+  street_number: Number
+})
+
 const cartSchema = new Schema<CartBase>({
   email: {
     type: String,
@@ -22,6 +28,7 @@ const cartSchema = new Schema<CartBase>({
     default: false
   },
   shipCost: Number,
+  address: addressSchema,
   total: {
     type: Number,
     default: 0,
