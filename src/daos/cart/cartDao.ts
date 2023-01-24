@@ -22,7 +22,7 @@ class CartDao {
       const findProduct = await this.productModel.findOne({_id: itemsData.productId})
       if(findProduct && findProduct.stock >= itemsData.quantity){
         const findCart = await this.model.findOne({email})
-        const total:number = findCart!.items.reduce((acc, el) => (acc += el.price * el.quantity), 0) + itemsData.price * itemsData.quantity
+        const total:number = findCart!.items.reduce((acc, el) => (acc += el.unit_price * el.quantity), 0) + itemsData.unit_price * itemsData.quantity
         if(findCart){
           const addProd: any = await this.model.findOneAndUpdate({email}, {$push: {items: itemsData}, total}, {new: true})
           return addProd
@@ -61,7 +61,7 @@ class CartDao {
     try {
       await this.model.findOneAndUpdate({email}, {$pull: {items: {productId: id}}}, {new: true})  
         .then(async(resp) => {
-          const total:number = resp!.items.reduce((acc, el) => (acc += el.price * el.quantity), 0)
+          const total:number = resp!.items.reduce((acc, el) => (acc += el.unit_price * el.quantity), 0)
           const cart = await this.model.findOneAndUpdate({email}, {total}, {new: true})
           return cart
         })

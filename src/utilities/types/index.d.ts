@@ -67,9 +67,12 @@ export interface ProductResponse {
 
 export interface CartItemForArray {
   productId: string
-  price: number
+  title: string
+  description: string,
+  unit_price: number
   quantity: number
-  thumbnail: string
+  picture_url: string
+  category_id: string
 }
 
 export interface CartBase{

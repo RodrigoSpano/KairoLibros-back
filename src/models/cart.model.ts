@@ -3,9 +3,12 @@ import { CartBase, CartItemForArray } from '../utilities/types'
 
 const itemSchema = new Schema<CartItemForArray>({
   productId: String,
-  price: Number,
+  title: String,
+  description: String,
+  unit_price: Number,
   quantity: Number,
-  thumbnail: String
+  picture_url: String,
+  category_id: String
 })
 
 const cartSchema = new Schema<CartBase>({
