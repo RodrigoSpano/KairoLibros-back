@@ -94,6 +94,7 @@ export interface CartBase{
 
 //order
 
+
 export interface OrderBase {
   id?: Types.ObjectId | string
   userData: Partial<UserBase>
@@ -103,8 +104,10 @@ export interface OrderBase {
   date: date
   totalPrice: number
   paymentMehtod: string
+  merchantId?: string
   orderNumber: Types.ObjectId | string
-  arrived: boolean
+  arrived: boolean,
+  sent: boolean
 }
 
 //mp one payment

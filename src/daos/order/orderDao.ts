@@ -1,14 +1,15 @@
 import cartModel from "../../models/cart.model"
 import userModel from "../../models/user.model"
 import orderModel from "../../models/order.model"
-import { CartBase, OrderBase, UserBase } from "../../utilities/types"
+import { UserBase } from "../../utilities/types"
 import { v4 as uuid} from 'uuid'
 import CartDao from "../cart/cartDao"
+import store from 'store2'
 
 class OrderDao {
   private model = orderModel
   private cartDao = new CartDao()
-  async generateOrder(email: string, paymentMehtod: string){
+  async generateOrder(email: string, paymentMethod: string, merchantId: string){
     try {
       const user: Partial<UserBase>|any = await userModel.findOne({email})
       const cart = await cartModel.findOne({email})
@@ -20,11 +21,12 @@ class OrderDao {
           address: cart?.address,
           date: new Date(),
           totalPrice: Number(cart?.total) + Number(cart?.shipCost),
-          paymentMehtod,
+          paymentMethod,
+          merchantId: paymentMethod === 'mercadopago' ? merchantId : null,
           orderNumber: uuid()
         })
         if(createOrder){
-          await this.cartDao.clearCart(email)
+          // await this.cartDao.clearCart(email)
           return createOrder
         }
       } else {
@@ -34,11 +36,11 @@ class OrderDao {
           ship: cart?.ship,
           date: new Date(),
           totalPrice: Number(cart?.total),
-          paymentMehtod,
+          paymentMethod,
           orderNumber: uuid()
         })
         if(createOrder){
-          await this.cartDao.clearCart(email)
+          // await this.cartDao.clearCart(email)
           return createOrder
         }
       }

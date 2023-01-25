@@ -31,9 +31,14 @@ const OrderSchema = new Schema<OrderBase>({
   date: Date,
   totalPrice: Number,
   paymentMehtod: String,
+  merchantId: String,
   orderNumber: String,
   arrived: {
     type:Boolean,
+    default: false
+  },
+  sent: {
+    type: Boolean,
     default: false
   }
 })
