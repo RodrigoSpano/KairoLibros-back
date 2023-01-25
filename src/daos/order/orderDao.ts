@@ -26,6 +26,7 @@ class OrderDao {
           orderNumber: uuid()
         })
         if(createOrder){
+          //todo => probar que se limpie el carro, activar!!!
           // await this.cartDao.clearCart(email)
           return createOrder
         }
@@ -40,6 +41,7 @@ class OrderDao {
           orderNumber: uuid()
         })
         if(createOrder){
+          //todo => aca tambien
           // await this.cartDao.clearCart(email)
           return createOrder
         }
