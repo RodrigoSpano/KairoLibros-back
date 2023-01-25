@@ -8,7 +8,7 @@ class PaymentService {
     const cart = await cartModel.findOne({email})
 
     const body = {
-      payer_email: `${email}`,
+      payer_email: email,
       items: cart!.items,
       backs_url: {
         success: '/success',
@@ -16,12 +16,12 @@ class PaymentService {
         pending: '/pending'
       },
       shipments: {cost: cart?.ship ? cart.shipCost : 0, mode: 'not_specified'} ,
-      // notification_url: 'https://www.your.site.com/ipn' //todo => endpoint para recibir estas notificaciones',
+      notification_url: 'https://1a3f-190-190-127-247.sa.ngrok.io/payment/notification' //todo => endpoint para recibir estas notificaciones',
     }
     const payment = await axios.post(url, body, {
       headers: {
         "Content-Type": 'application/json',
-        "Authorization": `Bearer ${process.env.MP_ACCESS_TOKEN}`
+        "Authorization": `Bearer ${process.env.MP_PRUEBA_ACCESS_TOKEN}`
       }
     })
     return payment.data
