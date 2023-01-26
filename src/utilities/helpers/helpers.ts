@@ -20,7 +20,4 @@ export const restStock = async (items: CartItemForArray[]) => {
       await productModel.findOneAndUpdate({_id: item.productId}, {$inc: {stock: -item.quantity}},{new:true})
     }
   }
-
 }
-
-//todo => probar si funciona

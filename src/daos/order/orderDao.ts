@@ -4,9 +4,11 @@ import orderModel from "../../models/order.model"
 import { UserBase } from "../../utilities/types"
 import { v4 as uuid} from 'uuid'
 import { restStock } from "../../utilities/helpers/helpers"
+import CartDao from "../cart/cartDao"
 
 class OrderDao {
   private model = orderModel
+  private cartDao = new CartDao()
   async generateOrder(email: string, paymentMethod: string, merchantId: string){
     try {
       const user: Partial<UserBase>|any = await userModel.findOne({email})
@@ -28,8 +30,7 @@ class OrderDao {
           orderNumber: uuid()
         })
         if(createOrder){
-          //todo => probar que se limpie el carro, activar!!!
-          // await this.cartDao.clearCart(email)
+          await this.cartDao.clearCart(email)
           return createOrder
         }
       } else {
@@ -44,8 +45,7 @@ class OrderDao {
           orderNumber: uuid()
         })
         if(createOrder){
-          //todo => aca tambien
-          // await this.cartDao.clearCart(email)
+          await this.cartDao.clearCart(email)
           return createOrder
         }
       }

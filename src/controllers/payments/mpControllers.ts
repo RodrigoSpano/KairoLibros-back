@@ -10,8 +10,7 @@ const api: MercadopagoApi = new MercadopagoApi()
 export const getPaymentLink =  async (req: Request, res: Response) => {
   try {
     const user: Partial<UserBase> = req.user!
-    const paymentLink = await api.getPaymentLink('test_user_1294452860@testuser.com')
-    // const paymentLink = await api.getPaymentLink(user.email!)
+    const paymentLink = await api.getPaymentLink(user.email!)
     res.redirect(paymentLink.init_point)
   } catch (error) {
     res.status(500).json({error: true, msg:'failed to create link!'})
@@ -26,7 +25,7 @@ export const postNotifications = async (req: Request, res: Response) => {
 
   if(query.topic === 'merchant_order') {
     let merchantId:any = query.id
-    const newOrder = await orderDao.generateOrder('test_user_1294452860@testuser.com', 'mercadopago', merchantId)
+    const newOrder = await orderDao.generateOrder(user.email!, 'mercadopago', merchantId)
     return res.status(201).json(newOrder)
   }
   } catch (error) {

@@ -16,7 +16,7 @@ class PaymentService {
         pending: '/pending'
       },
       shipments: {cost: cart?.ship ? cart.shipCost : 0, mode: 'not_specified'} ,
-      notification_url: 'https://fbb6-190-190-127-247.sa.ngrok.io/payment/notification' //todo => endpoint para recibir estas notificaciones',
+      notification_url: 'https://c284-190-190-127-247.ngrok.io/payment/notification' //todo => endpoint para recibir estas notificaciones',
     }
     const payment = await axios.post(url, body, {
       headers: {

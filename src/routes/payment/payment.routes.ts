@@ -8,7 +8,4 @@ const router = Router()
 router.get('/mercadopago', controller.getPaymentLink)
 router.post('/notification', checkMerchantId, controller.postNotifications)
 
-
-//todo => failed with POST method, better to try do a GET with the data from MONGODB CART, asi probrablemnte me deje hacerlo
-
 export default router
