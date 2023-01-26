@@ -40,6 +40,10 @@ const OrderSchema = new Schema<OrderBase>({
   sent: {
     type: Boolean,
     default: false
+  },
+  orderStatus: {
+    type: String,
+    default: 'approved'
   }
 })
 
