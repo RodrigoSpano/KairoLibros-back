@@ -9,12 +9,10 @@ router.get('/:id', middlewares.verifyExists,controllers.getOneProduct)
 router.get('/gender/:gender', controllers.getProductsByGender)
 router.post('/', isAdmin,controllers.createProduct)
 router.put('/price/:id', isAdmin, controllers.updatePrice)
-router.put('/stock/:id', controllers.updateStock)
+router.put('/stock/:id', isAdmin, controllers.updateStock)
 router.put('/popular/:id', isAdmin, controllers.togglePopular)
 router.put('/sale/:id', isAdmin, controllers.toggleSale)
 router.delete('/:id', isAdmin, controllers.deleteOne)
-
-//TODO => ME OLVIDE DE HACER EL METHOD, DAO Y API PARA ACTUALIZAR EL STOCK
 
 
 export default router;
