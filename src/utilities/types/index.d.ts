@@ -108,7 +108,7 @@ export interface OrderBase {
   orderNumber: Types.ObjectId | string
   arrived: boolean,
   sent: boolean,
-  orderStatus: order_status
+  orderStatus: string
 }
 
 //mp one payment
