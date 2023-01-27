@@ -1,11 +1,11 @@
 import cartModel from "../../models/cart.model"
 import userModel from "../../models/user.model"
 import orderModel from "../../models/order.model"
-import { CartBase, CartItemForArray, OrderBase, UserBase } from "../../utilities/types"
+import { UserBase } from "../../utilities/types"
 import { v4 as uuid} from 'uuid'
 import { restStock } from "../../utilities/helpers/helpers"
 import CartDao from "../cart/cartDao"
-import { NodemailerConfig, payment_method } from "../../utilities/types/types"
+import { NodemailerConfig, payment_method, order_status } from "../../utilities/types/types"
 import { transporter } from "../../services/nodemailer"
 
 class OrderDao {
@@ -113,15 +113,7 @@ class OrderDao {
       return error
     }
   }
-  async cancelOrder(orderNumber: string){
-    try {
-      const findOrder = await this.model.findOne({orderNumber})
-        if(!findOrder) return Error('order not found')
-          return await this.model.findOneAndUpdate({orderNumber}, {orderStatus: 'canceled'}, {new: true})
-    } catch (error) {
-      return error
-    }
-  }
+
   async deleteOrder(id: string){
     try {
       await this.model.deleteOne({_id:id})
@@ -144,6 +136,15 @@ class OrderDao {
       const findOne = await this.model.findOne({orderNumber})
       if(!findOne) return Error('order not found')
         return await this.model.findOneAndUpdate({orderNumber}, {sent: true }, {new: true})
+    } catch (error) {
+      return error
+    }
+  }
+  async setOrderStatus(orderNumber: string, status: order_status){
+    try {
+      const order = await this.model.findOne({orderNumber})
+      if(!order) return Error('order not found')
+      return await this.model.findOneAndUpdate({orderNumber}, {orderStatus: status}, {new: true})
     } catch (error) {
       return error
     }

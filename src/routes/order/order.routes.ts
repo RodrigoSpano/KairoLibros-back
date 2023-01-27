@@ -7,7 +7,7 @@ router.post('/create', controllers.createOrderWithoutMP)
 router.get('/:orderNumber', isAdmin,controllers.getOrder)
 router.put('/sent/:orderNumber', isAdmin, controllers.setSent)
 router.put('/arrived/:orderNumber', isAdmin, controllers.setArrived)
-router.put('/cancel/:orderNumber', isAdmin, controllers.cancelOrder)
+router.put('/status/:orderNumber', isAdmin, controllers.setOrderStatus)
 router.delete('/:id', isAdmin, controllers.deleteOrder)
 
 export default router

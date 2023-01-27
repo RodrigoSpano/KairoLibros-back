@@ -1,5 +1,5 @@
 import OrderDao from "../daos/order/orderDao";
-import { payment_method } from "../utilities/types/types";
+import { order_status, payment_method } from "../utilities/types/types";
 
 class OrderApi{
   private dao: OrderDao = new OrderDao()
@@ -10,8 +10,8 @@ class OrderApi{
   async getOrder(orderNumber:string){
     return await this.dao.getOrder(orderNumber)
   }
-  async cancelOrder(orderNumber: string){
-    return await this.dao.cancelOrder(orderNumber)
+  async setOrderStatus(orderNumber: string, status: order_status){
+    return await this.dao.setOrderStatus(orderNumber, status)
   }
   async deleteOrder(id: string){
     return await this.dao.deleteOrder(id)

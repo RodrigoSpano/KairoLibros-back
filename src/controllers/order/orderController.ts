@@ -40,10 +40,10 @@ export const getOrder = async (req: Request, res: Response) => {
   }
 }
 
-export const cancelOrder = async (req: Request, res: Response) => {
+export const setOrderStatus = async (req: Request, res: Response) => {
   try {
-    await api.cancelOrder(req.params.orderNumber)
-    return res.status(202).json({success: true})
+    await api.setOrderStatus(req.params.orderNumber, req.body.status)
+    return res.status(202).json({changedTo: req.body.status})
   } catch (error) {
     res.status(500).json(error)
   }
