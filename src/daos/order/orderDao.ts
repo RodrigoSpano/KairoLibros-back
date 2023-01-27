@@ -91,6 +91,12 @@ class OrderDao {
         orderStatus: 'pending'
       })
       if(order){
+        await transporter.sendMail({
+          from:'kairolibros@gmail.com',
+          to: `${user.email}`,
+          subject: 'METODO DE PAGO KAIROLIBROS!',
+          html: '<h1>Acabas de realizar una compra, es probable que hayas elegido "Efectivo" o "Transferencia bancaria"! </h1> </br> <h3> Manda un WSP al siguiente numero para acordar el metodo de pago. +54 1166211051</h3> <p> Vas a necesitar tu numero de orden que se te mando al confirmar la compra! </p>',
+        } satisfies NodemailerConfig)
         await restStock(cart!.items)
         await this.cartDao.clearCart(email)
         return order
