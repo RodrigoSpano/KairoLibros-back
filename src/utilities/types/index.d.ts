@@ -1,4 +1,5 @@
 import { Document, Types } from "mongoose";
+import { order_status, payment_method } from "./types";
 
 //users
 export interface UserBase {
@@ -94,7 +95,6 @@ export interface CartBase{
 
 //order
 
-
 export interface OrderBase {
   id?: Types.ObjectId | string
   userData: Partial<UserBase>
@@ -103,12 +103,12 @@ export interface OrderBase {
   address?: string
   date: date
   totalPrice: number
-  paymentMehtod: string
+  paymentMethod: payment_method
   merchantId?: string
   orderNumber: Types.ObjectId | string
   arrived: boolean,
   sent: boolean,
-  orderStatus?: string
+  orderStatus: order_status
 }
 
 //mp one payment

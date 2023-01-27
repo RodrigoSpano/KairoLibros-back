@@ -1,10 +1,11 @@
 import OrderDao from "../daos/order/orderDao";
+import { payment_method } from "../utilities/types/types";
 
 class OrderApi{
   private dao: OrderDao = new OrderDao()
 
-  async createOrder(email:string, paymentMethod: string, merchantId: string){
-    return await this.dao.generateOrder(email, paymentMethod, merchantId)
+  async createOrder(email:string, paymentMethod: payment_method){
+    return await this.dao.createOrderWithotMP(email, paymentMethod)
   }
   async getOrder(orderNumber:string){
     return await this.dao.getOrder(orderNumber)

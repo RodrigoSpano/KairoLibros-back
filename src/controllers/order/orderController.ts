@@ -7,7 +7,7 @@ const api: OrderApi = new OrderApi()
 export const createOrderWithoutMP = async (req: Request, res: Response) => {
   try {
     const user: Partial<UserBase> = req.user!
-    await api.createOrder(user.email!, req.body.paymentMethod, '')
+    await api.createOrder(user.email!, req.body.paymentMethod)
       .then((resp: any) => {
         if(resp) return res.status(201).json({orderNumber: resp.orderNumber})
         res.status(400)

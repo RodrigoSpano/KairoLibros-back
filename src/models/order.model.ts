@@ -30,7 +30,7 @@ const OrderSchema = new Schema<OrderBase>({
   address: addressSchema,
   date: Date,
   totalPrice: Number,
-  paymentMehtod: String,
+  paymentMethod: String,
   merchantId: String,
   orderNumber: String,
   arrived: {

@@ -1,9 +1,7 @@
-import axios from "axios";
 import { Request, Response } from "express";
 import MercadopagoApi from "../../api/mpApi";
 import { UserBase } from "../../utilities/types";
 import OrderDao from "../../daos/order/orderDao";
-import orderModel from "../../models/order.model";
 
 const api: MercadopagoApi = new MercadopagoApi()
 
