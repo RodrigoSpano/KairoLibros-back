@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose"
-import {UserBase, UserFunctions} from '../utilities/interfaces/index'
+import {UserBase, UserFunctions} from '../utilities/types/index'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
@@ -14,6 +14,7 @@ const userSchema = new Schema<UserBase>({
         required: true,
         unique: true
     },
+    area_code: String,
     phone: String,
     password: String,
     isAdmin: {

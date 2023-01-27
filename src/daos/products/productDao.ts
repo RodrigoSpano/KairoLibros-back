@@ -1,5 +1,5 @@
 import productModel from "../../models/product.model";
-import { IProductBase } from "../../utilities/interfaces";
+import { IProductBase } from "../../utilities/types";
 
 class ProductDao {
   private model = productModel

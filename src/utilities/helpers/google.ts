@@ -1,4 +1,4 @@
-import { UserBase } from '../interfaces/index.d';
+import { UserBase } from '../types';
 import passport from "passport";
 import { Profile, Strategy as GoogleStrategy, VerifyCallback } from "passport-google-oauth20";
 import userModel from "../../models/user.model";

@@ -1,5 +1,5 @@
 import AuthDao from "../daos/auth/authDao";
-import { LoginData, UserBase } from "../utilities/interfaces";
+import { LoginData, UserBase } from "../utilities/types";
 
 class AuthApi{
     private dao = new AuthDao()
@@ -10,6 +10,9 @@ class AuthApi{
     }
     async login(data:LoginData){
         return await this.dao.login(data)
+    }
+    async changePassword(email: string, password: string){
+        return await this.dao.changePassword(email, password)
     }
 }
 

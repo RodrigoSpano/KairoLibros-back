@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import AuthApi from "../../api/authApi";
-import { LoginData, UserBase } from "../../utilities/interfaces";
+import { LoginData, UserBase } from "../../utilities/types";
 
 const api: AuthApi = new AuthApi();
 
@@ -11,7 +11,8 @@ export const signup = async (req: Request, res: Response) => {
     const data: UserBase = {
       username: `${req.body.firstName} ${req.body.lastName}`,
       email: req.body.email,
-      phone: `${req.body.phoneArea} ${req.body.phoneNumber}`,
+      area_code: req.body.area_code,
+      phone: req.body.phoneNumber,
       password: req.body.password,
     };
     const newUser = await api.register(data);
@@ -47,6 +48,14 @@ export const logout = async (req: Request, res: Response) => {
   }
 };
 
+export const changePassword = async (req: Request, res: Response) => {
+  try {
+    const user: Partial<UserBase> = req.user!
+    return await api.changePassword(req.user ? user.email! : req.body.email , req.body.newPassword)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
 
 export const authentication = async (req: Request, res: Response) => {
   res.status(200).json({success: true})
