@@ -12,6 +12,6 @@ router.use('/auth', authRoutes)
 router.use('/products', productsRoute)
 router.use('/cart', isAuth, cartRoute)
 router.use('/payment', isAuth, paymentRoute)
-router.use('/order', isAuth, orderRoute) //todo => proteger con isAuth las rutas simples y con isAdmin las q sean para admin
+router.use('/order', isAuth, orderRoute)
 
 export default router
