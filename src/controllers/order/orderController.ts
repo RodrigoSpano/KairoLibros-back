@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import OrderApi from "../../api/orderApi";
+import { transporter } from "../../services/nodemailer";
 import { UserBase } from "../../utilities/types";
+import { NodemailerConfig } from "../../utilities/types/types";
 
 const api: OrderApi = new OrderApi()
 
@@ -9,7 +11,18 @@ export const createOrderWithoutMP = async (req: Request, res: Response) => {
     const user: Partial<UserBase> = req.user!
     await api.createOrder(user.email!, req.body.paymentMethod)
       .then((resp: any) => {
-        if(resp) return res.status(201).json({orderNumber: resp.orderNumber})
+        if(resp){
+          transporter.sendMail({
+            from: 'kairolibros@gmail.com',
+            to: `kairolibros@gmail.com, ${user.email}`,
+            subject: 'Nueva Orden Generada!!',
+            html: `<h1> Acabas de realizar una compra en Kairolibros!</h1> </br>
+              <h2> tu numero de orden es: ${resp.orderNumber} </h2> </br>
+              <p>el numero de orden te sirve en caso de que ocurra algun error con tu pedido</p>
+            `
+          } satisfies NodemailerConfig)
+          return res.status(201).json({orderNumber: resp.orderNumber})
+        }
         res.status(400)
       })
   } catch (error) {

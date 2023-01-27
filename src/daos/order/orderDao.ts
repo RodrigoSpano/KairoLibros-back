@@ -5,7 +5,8 @@ import { CartBase, CartItemForArray, OrderBase, UserBase } from "../../utilities
 import { v4 as uuid} from 'uuid'
 import { restStock } from "../../utilities/helpers/helpers"
 import CartDao from "../cart/cartDao"
-import { payment_method } from "../../utilities/types/types"
+import { NodemailerConfig, payment_method } from "../../utilities/types/types"
+import { transporter } from "../../services/nodemailer"
 
 class OrderDao {
   private model = orderModel
@@ -31,6 +32,15 @@ class OrderDao {
           orderNumber: uuid()
         })
         if(createOrder){
+          await transporter.sendMail({
+            from: 'kairolibros@gmail.com',
+            to: `kairolibros@gmail.com, ${createOrder.userData.email}`,
+            subject: 'Nueva Orden Generada!!',
+            html: `<h1> Acabas de realizar una compra en Kairolibros!</h1> </br>
+              <h2> tu numero de orden es: ${createOrder.orderNumber} </h2> </br>
+              <p>el numero de orden te sirve en caso de que ocurra algun error con tu pedido</p>
+            `
+          } satisfies NodemailerConfig)
           await this.cartDao.clearCart(email)
           return createOrder
         }
@@ -46,6 +56,15 @@ class OrderDao {
           orderNumber: uuid()
         })
         if(createOrder){
+          await transporter.sendMail({
+            from: 'kairolibros@gmail.com',
+            to: `kairolibros@gmail.com, ${createOrder.userData.email}`,
+            subject: 'Nueva Orden Generada!!',
+            html: `<h1> Acabas de realizar una compra en Kairolibros!</h1> </br>
+              <h2> tu numero de orden es: ${createOrder.orderNumber} </h2> </br>
+              <p>el numero de orden te sirve en caso de que ocurra algun error con tu pedido</p>
+            `
+          } satisfies NodemailerConfig)
           await this.cartDao.clearCart(email)
           return createOrder
         }
