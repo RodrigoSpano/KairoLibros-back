@@ -7,12 +7,15 @@ import passport from 'passport'
 
 import 'dotenv/config'
 
-import indexRouter from './routes/index.routes'
 import JWTStrategy from './utilities/helpers/passport.config'
+import indexRouter from './routes/index.routes'
+import cors from 'cors'
 
 require('./utilities/helpers/google')
 
 const app = express()
+
+app.use(cors({origin: 'http://localhost:3000'}))
 
 app.use(
     session({
